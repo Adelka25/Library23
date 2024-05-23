@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Library.Models
 {
     public partial class Author
-    {
+    { //объединяем фио в одну строку
         public string FullName { get => $"{Lastname} {Firstname} {Patronymic}"; }
     }
 }

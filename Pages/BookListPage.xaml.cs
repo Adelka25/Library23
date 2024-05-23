@@ -28,9 +28,10 @@ namespace Library.Pages
         {
             InitializeComponent();
             try
-            {
+            { //к существующим жанрам прибавляется виртуальное поле "все книги"
                 var genres = App.db.Genres.ToList();
                 genres.Insert(0, new Genre() { Id = 0, Name = "Все книги" });
+                //заполнение комбобокса наименованием жанра
                 GenrehCb.ItemsSource = genres;
                 GenrehCb.DisplayMemberPath = "Name";
                 Refresh();
@@ -53,7 +54,7 @@ namespace Library.Pages
         {
             Navigation.NextPage(new PageComponent("Добавление книги", new AddEditBookPage(new Book())));
         }
-
+        //редактирование книги
         private void EditBtn_Click(object sender, RoutedEventArgs e)
         {
             //если книга выбрана из списка, открыть окно редактирования
@@ -64,11 +65,11 @@ namespace Library.Pages
             }
             else
             {
-                MessageBox.Show("Выберете книгу для изменения!");
+                MessageBox.Show("Выберите книгу для изменения!");
             }
 
         }
-
+        //удаление книги
         private void DeleteBtn_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -77,12 +78,12 @@ namespace Library.Pages
                 var selBook = BookList.SelectedItem as Book;
                 if (selBook != null)
                 {
-                    //откравать окно с кнопка да, нет
+                    //открывать окно с кнопки да, нет
                     MessageBoxResult result = MessageBox.Show($"Вы действительно хотите удалить одну копию книги \"{selBook.Name}\"?", "Удаление одной копии", MessageBoxButton.YesNo);
                     if (selBook.CountCopies == 0 && App.db.Bookissuances.Any(x => x.BookId == selBook.Id))
                     {
                         MessageBox.Show("Удаление невозможно, данные копии на руках у читателей");
-                        return;
+                        return; //дальше выполнять не надо если условие выполнено
                     }
                     //если нажато да, выполнить перемещение одной копии в архив
                     if (result == MessageBoxResult.Yes)
@@ -107,7 +108,7 @@ namespace Library.Pages
                                 Year = selBook.Year,
                                 CountCopies = 1
                             };
-
+                            //добавление в базу данных 
                             App.db.Bookarchives.Add(bookarchive);
                         }
 
@@ -122,7 +123,7 @@ namespace Library.Pages
                 }
                 else
                 {
-                    MessageBox.Show("Выберете книгу для удаления!");
+                    MessageBox.Show("Выберите книгу для удаления!");
                 }
             }
             catch
@@ -131,7 +132,7 @@ namespace Library.Pages
             }
 
         }
-        //метод организующий выборку из списка( фильткацию и поиск)
+        //метод организующий выборку из списка( фильтрацию и поиск)
         public void Refresh()
         {
             try
@@ -164,18 +165,18 @@ namespace Library.Pages
 
         }
         private void SearchTb_TextChanged(object sender, TextChangedEventArgs e)
-        {
+        { //для обновления
             Refresh();
 
         }
 
         private void GenrehCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
+        { //для обновления
             Refresh();
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
-        {
+        { //для обновления
             Refresh();
 
         }

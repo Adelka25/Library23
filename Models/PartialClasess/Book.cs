@@ -9,16 +9,8 @@ namespace Library.Models
 {
     public partial class Book
     {
-        public Color ColorNoCopies
-        {
-            get
-            {
-                if(CountCopies == 0)
-                 return Colors.Gray;
-                else 
-                    return Colors.Black;
-            }
-        }
+
+        //условие цвета серый в колонке на стр книг (все копии на руках)
         public string ColorNoCopiess
         {
             get

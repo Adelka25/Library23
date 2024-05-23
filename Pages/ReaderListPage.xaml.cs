@@ -73,7 +73,37 @@ namespace Library.Pages
 
         private void DeleteBtn_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                //если что-то выбрано из списка открыть окно с кнопками да, нет , для удаления
+                var selReader = ReaderList.SelectedItem as Reader;
+                if (selReader != null)
+                {
+                    MessageBoxResult result = MessageBox.Show($"Вы действительно хотите удалить читателя \"{selReader.FullName}\"?", "Удаление читателя", MessageBoxButton.YesNo);
+                    if (App.db.Bookissuances.Any(x => x.ReaderNumberLibraryCard == selReader.NumberLibraryCard))
+                    {
+                        MessageBox.Show("Невозможно удалить читателя, так как есть выданная книга!");
+                        return;
+                    }
+                    App.db.Readers.Remove(selReader);
+                    App.db.SaveChanges();
+                    Refresh();
+                }
+                else
+                {
+                    MessageBox.Show("Выберите читателя из списка!");
+                }
 
+            }
+            catch
+            {
+                MessageBox.Show("Возникла ошибка!");
+            }
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            Refresh();
         }
     }
 }

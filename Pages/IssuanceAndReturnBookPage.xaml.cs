@@ -43,14 +43,14 @@ namespace Library.Pages
                 {
                     AddBtn.Visibility = Visibility.Collapsed;
                 }
-                //если возел админ выводить все записи
+                //если вошел админ выводить все записи
                 if (App.AuthUser.RoleId == 1)
                 {
                     bookissuances = App.db.Bookissuances
                    .Include(p => p.Reader)
                    .Include(p => p.Book)
                    .ToList();
-                }//если вощел читатель выводить только его взятые книги
+                }//если вошел читатель выводить только его взятые книги
                 else
                 {
                     bookissuances = App.db.Bookissuances
@@ -78,7 +78,7 @@ namespace Library.Pages
 
         }
         private void ExtendBtn_Click(object sender, RoutedEventArgs e)
-        {
+        { //отслеживание на какой записи была нажата кнопка "продлить" и какие там данные
             var select = (sender as Button).DataContext as Bookissuance;
             Navigation.NextPage(new PageComponent("Продление книги", new ExtendBookPage(select)));
         }
@@ -87,10 +87,10 @@ namespace Library.Pages
         {
             try
             {
-                //при возврате запись из таблицы возвраткинги перемещается в возврат кинги архив
+                //при возврате запись из таблицы возврат- книги перемещается в возврат книги архив
                 //отслеживаем на какой записи была нажата кнопка возврат
                 var select = (sender as Button).DataContext as Bookissuance;
-                //сохдаем новый обьект типа bookissuancearchive (архив)
+                //создаем новый обьект типа bookissuancearchive (архив)
                 Bookissuancearchive bookissuancearchive = new Bookissuancearchive()
                 {
                     BookId = select.BookId,

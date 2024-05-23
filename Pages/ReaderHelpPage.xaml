@@ -10,7 +10,7 @@
 
     <Grid Background="White">
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock TextWrapping="Wrap">По нажатию кнопки Выход в правом верхнем углу, происходит выход из учетной записи и переход на окно авторизации</TextBlock>
+            <TextBlock TextWrapping="Wrap">По нажатию кнопки Выход в правом верхнем углу, происходит выход из учетной записи и переход на окно авторизации.</TextBlock>
             <TextBlock TextWrapping="Wrap">По нажатию кнопки Взятые книги в меню читателя, открывается список взятых читателем книг.</TextBlock>
             <TextBlock TextWrapping="Wrap">Если срок возврата просрочен, запись выделяется красной рамкой, внизу записи выводится красный текст Возврат проcрочен.</TextBlock>
             <TextBlock TextWrapping="Wrap">Возможен поиск по наименованию книги.</TextBlock>

@@ -41,11 +41,11 @@ namespace Library.Pages
         {
             try
             {
-                //регялрные выражения для пароля
+                //регулярные выражения для пароля
                 var hasNumber = new Regex(@"[0-9]+");
                 var hasUpperChar = new Regex(@"[A-Z]+");
                 var hasMinimum6Chars = new Regex(@".{6,}");
-                //регулярное выражание для номера телефона
+                //регулярное выражение для номера телефона
                 var PhoneRegex = new Regex(@"^(\+7|8|7)\d{10}$");
                 //проверка что поля заполнены
                 if (string.IsNullOrWhiteSpace(LastNameTb.Text)
@@ -62,22 +62,22 @@ namespace Library.Pages
                     ValidTb.Text = "Неверный номер!";
                     return;
                 }
-                
+                // если при изменение пользователя поле пароль не был пустым присвоить новый пароль, иначе оставить старый пароль
                 var localPassword = PasswordTb.Password != "" ? PasswordTb.Password : user.Password;
                 //проверка пароля 
                 if (!hasNumber.IsMatch(localPassword))
                 {
-                    ValidTb.Text = "Пароль дложен содержать цифру!";
+                    ValidTb.Text = "Пароль должен содержать цифру!";
                     return;
                 }
                 if (!hasUpperChar.IsMatch(localPassword))
                 {
-                    ValidTb.Text = "Пароль дложен содержать заглавную букву!";
+                    ValidTb.Text = "Пароль должен содержать заглавную букву!";
                     return;
                 }
                 if (!hasMinimum6Chars.IsMatch(localPassword))
                 {
-                    ValidTb.Text = "Пароль дложен состоять минимум из 6 символов!";
+                    ValidTb.Text = "Пароль должен состоять минимум из 6 символов!";
                     return;
                 }
                 if (PasswordTb.Password != PasswordTwoTb.Password)
@@ -88,6 +88,7 @@ namespace Library.Pages
 
                 user.Password = localPassword;
                 ValidTb.Text = "";
+                //проверка если пользователь пришел с id=0 выполнить добавление в базу
                 if (user.Id == 0)
                 {
                     //добавление нового читателя в базу
@@ -99,8 +100,8 @@ namespace Library.Pages
                         Address = AddressTb.Text,
                         Phone = PhoneTb.Text
                     });
-
-                    //добавление нового польхователя системы, к пользователю привязывается чичтатель
+                    App.db.SaveChanges();
+                    //добавление нового пользователя системы, к пользователю привязывается читатель
                     App.db.Users.Add(new User()
                     {
                         Login = LoginTb.Text,
@@ -109,7 +110,7 @@ namespace Library.Pages
                         RoleId = 2
                     });
                 }
-                //сохранение в базе данныз
+                //сохранение в базе данных
                 App.db.SaveChanges();
                 MessageBox.Show("Сохранено!");
                 //возврат на предыдущую страницу
@@ -135,7 +136,7 @@ namespace Library.Pages
         }
         private void TextBoxNumber_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            //в тексибокс можно вводить только цифры
+            //в текстбокс можно вводить только цифры
             if (!(char.IsDigit(char.Parse(e.Text))))
             {
                 e.Handled = true;

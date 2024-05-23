@@ -11,7 +11,7 @@
             <RowDefinition Height="20*"/>
             <RowDefinition Height="180*"/>
         </Grid.RowDefinitions>
-        <Image Source="/probiblioteku.jpg" Grid.RowSpan="3" Stretch="Fill" Opacity="0.5"/>
+        <Image Source="/probiblioteku.jpg" Grid.RowSpan="2" Stretch="Fill" Opacity="0.5"/>
         <StackPanel Orientation="Horizontal"  HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock x:Name="TitleTb" FontSize="23">Районная библиотека</TextBlock>
         </StackPanel>

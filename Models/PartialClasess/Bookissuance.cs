@@ -10,7 +10,7 @@ namespace Library.Models
     public partial class Bookissuance
     {
         public Visibility VisibilityBtn
-        {
+        { //когда зашел админ кнопки  возврат и продлить видны
             get
             {
                 if (App.AuthUser.RoleId == 1)
@@ -21,7 +21,7 @@ namespace Library.Models
             }
         }
         public string OverdueDate
-        {
+        { //проверка даты на возврат текущей датой
             get
             {
                 if(DateOfReturn < DateTime.Now)
@@ -36,7 +36,7 @@ namespace Library.Models
             }
         }
         public string ColorOverdueDate
-        {
+        { //если дата возврата просрочена то запись в красной рамке- серый
             get
             {
                 if (DateOfReturn < DateTime.Now)

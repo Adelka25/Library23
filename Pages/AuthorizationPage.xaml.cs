@@ -62,7 +62,7 @@ namespace Library.Pages
         {
             Navigation.NextPage(new PageComponent("Регистрация читателя", new RegistrationPage(new User())));
         }
-
+        //стр книги для гостя
         private void OpenBookList_Click(object sender, RoutedEventArgs e)
         {
             Navigation.NextPage(new PageComponent("Книги", new BookListPage()));
