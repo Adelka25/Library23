@@ -29,10 +29,10 @@ namespace Library.Pages
         public IssuanceAndReturnBookPage()
         {
             InitializeComponent();
-            Refresh();
+            Refresh ();
 
         }
-        //метод  обновления списка
+        //метод обновления списка
         private void Refresh()
         {
             try
