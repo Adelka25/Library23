@@ -32,7 +32,7 @@ namespace Library.Pages
             Refresh();
 
         }
-        //метод обновления списка
+        //метод  обновления списка
         private void Refresh()
         {
             try
